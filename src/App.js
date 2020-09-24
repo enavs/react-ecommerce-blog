@@ -6,6 +6,10 @@ import Main from './views/Main';
 import Something from './views/Something';
 import Blog from './views/Blog';
 import BlogPost from './components/BlogPost';
+import Cart from './views/Cart';
+import Marketplace from './views/Marketplace';
+import './/App.css';
+import './/custom.css';
 
 
 export default class App extends Component {
@@ -15,7 +19,9 @@ export default class App extends Component {
 
     this.state = {
       employees: [],
-      employeeInformation: {}
+      employeeInformation: {},
+      products: [],
+      cart: []
     }
   }
 
@@ -24,10 +30,14 @@ export default class App extends Component {
     fetch('./data.json')
       .then(response => response.json())
       .then(data => {
-        this.setState({ 
+        this.setState({
           employees: data
-         })
+        })
       })
+
+    fetch('http://localhost:5000/api/shop')
+      .then(res => res.json())
+      .then(data => this.setState({ products: data }))
   }
 
   handleSelectEmployee = (empObj) => {
@@ -35,6 +45,12 @@ export default class App extends Component {
       employeeInformation: empObj
     })
     // console.log(empObj);
+  }
+
+  handleAddToCart = productObj => {
+    this.setState({
+      cart: this.state.cart.concat(productObj)
+    })
   }
 
   render() {
@@ -46,10 +62,12 @@ export default class App extends Component {
         <main>
           <div className="container">
             <Switch>
-              <Route exact path="/" render={() => <Main employees={this.state.employees} handleSelectEmployee={this.handleSelectEmployee} employeeInformation={this.state.employeeInformation}  />} />
+              <Route exact path="/" render={() => <Main employees={this.state.employees} handleSelectEmployee={this.handleSelectEmployee} employeeInformation={this.state.employeeInformation} />} />
               <Route exact path="/something" render={() => <Something />} />
               <Route exact path="/blog" render={() => <Blog />} />
               <Route exact path="/blog/:postId" render={({ match }) => <BlogPost match={match} />} />
+              <Route exact path='/cart' render={() => <Cart />} />
+              <Route exact path='/marketplace' render={() => <Marketplace products={this.state.products} handleAddToCart={this.handleAddToCart} />} />
             </Switch>
           </div>
         </main>

@@ -41,3 +41,7 @@
 .title {
   text-transform: capitalize;
 }
+
+.navbar {
+  margin-bottom: 35px;
+}

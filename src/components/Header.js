@@ -22,6 +22,22 @@ export default class Header extends Component {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/blog">Blog</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/marketplace">Marketplace</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/cart">
+                                    <span>Cart </span>
+                                    <i style={{marginRight: '5px'}} className="fa fa-shopping-cart"></i>
+                                    <span className="badge badge-light"> 0 | 0.00
+                                        {/*{% if cart %}
+                                        {{ cart['items']| length }} | {{ '${:,.2f}'.format(cart['cart_total']) }}
+                                        {% else %}
+                                        0 | $0.00
+                                        {% endif %} */}
+                                    </span>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                 </nav>
