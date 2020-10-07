@@ -21,7 +21,9 @@ export default class InformationList extends Component {
 
         return (
             <div>
-                <div className="card-header">Information</div>
+                <div className="card-header">
+                    Information <span> <i className="fa fa-question-circle"></i> </span>
+                </div>
                 <ul id="information" className="list-group list-group-flush">
                     {informationList.map((lineItem, index) => (
                         <Information attrName={lineItem[0]} attrValue={lineItem[1]} key={index} />

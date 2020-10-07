@@ -3,6 +3,8 @@ import Employees from '../components/Employees'
 import InformationList from '../components/InformationList'
 import SkillList from '../components/SkillList'
 
+import '../custom.css';
+
 export default class Main extends Component {
     render() {
         // let employees = this.props.employees;

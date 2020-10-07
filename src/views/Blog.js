@@ -11,7 +11,7 @@ export default class Blog extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/api/blog')
+        fetch('https://flaskbook-api.herokuapp.com/api/blog')
         .then(res => res.json())
         .then(data => this.setState({ posts:data }))
     }
@@ -26,7 +26,6 @@ export default class Blog extends Component {
                         {posts.map(post => (
                             <Post post={post} key={post.id} />
                         ))}
-                        <h3>No posts to show</h3>
                     </ul>
                 </div>
             </div>

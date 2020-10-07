@@ -7,7 +7,9 @@ export default class SkillList extends Component {
 
         return (
             <div>
-                <div className="card-header">Skills</div>
+                <div className="card-header">
+                    Skills <span> <i class="fa fa-list"></i> </span>    
+                </div>
                 <ul id="skills" className="list-group list-group-flush">
                     {skills ? skills.map((skill, index) => (
                         <Skill label={Object.keys(skill)} labelText={Object.values(skill)} />

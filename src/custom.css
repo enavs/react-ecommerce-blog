@@ -1,24 +1,24 @@
 @import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-​
+
 nav {
     margin-bottom: 30px;
 }
-​
+
 .card-product:after {
     content: "";
     display: table;
     clear: both;
     visibility: hidden; 
 }
-​
+
 .card-product .price-new, .card-product .price {
     margin-right: 5px; 
 }
-​
+
 .card-product .price-old {
     color: #999; 
 }
-​
+
 .card-product .img-wrap {
     border-radius: 3px 3px 0 0;
     overflow: hidden;
@@ -26,7 +26,6 @@ nav {
     height: 220px;
     text-align: center; 
 }
-​
 .card-product .img-wrap img {
     max-height: 100%;
     max-width: 100%;
@@ -38,7 +37,6 @@ nav {
     padding: 15px;
     border-top: 1px solid #eee; 
 }
-​
 .card-product .action-wrap {
     padding-top: 4px;
     margin-top: 4px; 
@@ -47,13 +45,13 @@ nav {
     padding: 15px;
     border-top: 1px solid #eee; 
 }
-​
+
 .card-product .title {
     margin-top: 0; 
 }
-​
-​
-​
+
+
+
 .quantity {
     float: left;
     margin-right: 15px;
@@ -62,7 +60,6 @@ nav {
     width: 80px;
     overflow: hidden
 }
-​
 .quantity input {
     margin: 0;
     text-align: center;
@@ -76,7 +73,6 @@ nav {
     outline: 0;
     background-color: #F6F6F6
 }
-​
 .quantity input.qty {
     position: relative;
     border: 0;
@@ -89,7 +85,6 @@ nav {
     border-radius: 0;
     background-clip: padding-box
 }
-​
 .quantity .minus, .quantity .plus {
     line-height: 0;
     background-clip: padding-box;
@@ -108,11 +103,11 @@ nav {
     width: 25px;
     z-index: 3
 }
-​
+
 .quantity .minus:hover, .quantity .plus:hover {
     background-color: #dad8da
 }
-​
+
 .quantity .minus {
     bottom: 0
 }

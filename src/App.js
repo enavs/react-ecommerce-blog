@@ -7,9 +7,8 @@ import Something from './views/Something';
 import Blog from './views/Blog';
 import BlogPost from './components/BlogPost';
 import Cart from './views/Cart';
-import Marketplace from './views/Marketplace';
-import './/App.css';
-import './/custom.css';
+import Martketplace from './views/Martketplace';
+import './App.css';
 
 
 export default class App extends Component {
@@ -21,7 +20,8 @@ export default class App extends Component {
       employees: [],
       employeeInformation: {},
       products: [],
-      cart: []
+      cart: [],
+      cartTotal: 0
     }
   }
 
@@ -35,9 +35,11 @@ export default class App extends Component {
         })
       })
 
-    fetch('http://localhost:5000/api/shop')
-      .then(res => res.json())
-      .then(data => this.setState({ products: data }))
+    fetch('https://flaskbook-api.herokuapp.com/api/shop')
+      .then(response => response.json())
+      .then(data => this.setState({
+        products: data
+      }));
   }
 
   handleSelectEmployee = (empObj) => {
@@ -47,17 +49,65 @@ export default class App extends Component {
     // console.log(empObj);
   }
 
+  // updateTotal = (cartProducts) => {
+  //   var count = 0; 
+  //   for (const p of cartProducts) {
+  //       count += p.price;
+  //   }
+  //   return count
+  // }
+
   handleAddToCart = productObj => {
+    var count = this.state.cartTotal;
+
     this.setState({
       cart: this.state.cart.concat(productObj)
     })
+
+    this.setState({
+      cartTotal: count += productObj.price
+    })
+  }
+
+  handleRemoveFromCart = productObj => {
+    let cart = [...this.state.cart];
+
+    // for (let i = 0; i < num; i++) {
+
+    let index = cart.indexOf(productObj);
+
+    let total = this.state.cartTotal;
+    if (index !== -1) {
+      cart.splice(index, 1);
+
+      this.setState({
+        cart: cart,
+        cartTotal: total -= productObj.price
+      })
+    }
+    // }
+  }
+
+  handleClearCart = () => {
+    this.setState({
+      cart: [],
+      cartTotal: 0
+    })
+  }
+  
+  getCountOfProduct = (product, cart) => {
+    var count = 0;
+    cart.forEach(element => { if (element === product) { count += 1 } })
+    return count
   }
 
   render() {
+    // console.log(this.state.products);
     // console.log("Rendered")
+
     return (
       <div>
-        <Header />
+        <Header cart={this.state.cart} cartTotal={this.state.cartTotal} />
 
         <main>
           <div className="container">
@@ -66,8 +116,9 @@ export default class App extends Component {
               <Route exact path="/something" render={() => <Something />} />
               <Route exact path="/blog" render={() => <Blog />} />
               <Route exact path="/blog/:postId" render={({ match }) => <BlogPost match={match} />} />
-              <Route exact path='/cart' render={() => <Cart />} />
-              <Route exact path='/marketplace' render={() => <Marketplace products={this.state.products} handleAddToCart={this.handleAddToCart} />} />
+              <Route exact path="/marketplace" render={() => <Martketplace products={this.state.products} handleAddToCart={this.handleAddToCart} />} />
+              <Route exact path="/cart" render={() => <Cart cart={this.state.cart} cartTotal={this.state.cartTotal} handleRemoveFromCart={this.handleRemoveFromCart} handleClearCart={this.handleClearCart} getCountOfProduct={this.getCountOfProduct} />
+} />
             </Switch>
           </div>
         </main>
